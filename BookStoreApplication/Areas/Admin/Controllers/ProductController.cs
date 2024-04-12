@@ -1,8 +1,11 @@
 ﻿using BookStore.DataAccess.Repository.IRepository;
 using BookStore.Models.ViewModels;
+using BookStore.Utility;
+
 //using BookStore.Models;
 using BookStoreApplication.Data;
 using BookStoreApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -10,6 +13,7 @@ using System.Collections.Generic;
 namespace BookStoreApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticDetails.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
