@@ -1,0 +1,22 @@
+﻿name: Build and Deploy BookStore Webapp to azure
+on:
+  push:
+    branches:
+    - master
+env:
+  DOTNET_CORE_VERSION: 8.0.x
+  WORKING_DIRECTORY: BookStoreApplication
+  CONFIGURATION: Release
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+    - name: Restore
+      run: dotnet restore BookStoreApplication/BookStoreApplication.csproj
+    - name: Build
+      run: dotnet build ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-restore
